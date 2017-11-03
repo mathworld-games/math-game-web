@@ -1,28 +1,30 @@
-export function generateQuestionsList(numberOfQuestions, maxNumber) {
+export function generateQuestionsList(numberOfQuestions, maxNumber, operators) {
   let questionsList = [];
 
   for (let i = 0; i < numberOfQuestions; i++) {
-    let firstNumber, secondNumber, question, multiplicator;
-    let operators = ['+', '-', '*', '/'];
+    let firstNumber, secondNumber, question;
+
     let operator = operators[Math.floor(Math.random() * operators.length)];
-    secondNumber = Math.floor(Math.random() * maxNumber);
-    if (secondNumber > 0) {
-      multiplicator =
-        Math.floor(Math.random() * (maxNumber / secondNumber) - 1) + 1;
-    } else {
-      multiplicator = 1;
+
+    if (operator === ":") {
+      secondNumber = Math.floor(Math.random() * (maxNumber / 2) + 1);
+      firstNumber = secondNumber * 2;
     }
 
-    if (operator === '/') {
-      firstNumber = Math.floor(secondNumber * multiplicator);
-    } else {
+    if (operator === "x") {
+      firstNumber = Math.floor(Math.random() * maxNumber + 1);
+      secondNumber = 2;
+    }
+
+    if (operator === "+" || operator === "-") {
       firstNumber = Math.floor(Math.random() * maxNumber);
+      secondNumber = Math.floor(Math.random() * maxNumber);
     }
 
-    if (operator === '-' && secondNumber > firstNumber) {
-      question = secondNumber + ' ' + operator + ' ' + firstNumber;
+    if (operator === "-" && secondNumber > firstNumber) {
+      question = secondNumber + " " + operator + " " + firstNumber;
     } else {
-      question = firstNumber + ' ' + operator + ' ' + secondNumber;
+      question = firstNumber + " " + operator + " " + secondNumber;
     }
 
     questionsList.push(question);
