@@ -83,6 +83,7 @@ class Game extends Component {
   componentDidMount = () => {
     this.node.addEventListener('click', this.handleClick);
     this.muteBtn.addEventListener('click', this.muteSounds);
+    // почему this.unsubscribe, а не this.subscribe?
     this.unsubscribe = store.subscribe(() => this.forceUpdate());
 
     store.dispatch(setCurrentUser(this.state.user));
@@ -206,6 +207,7 @@ class Game extends Component {
     clearInterval(this.countdown);
     this.restartCountdown();
 
+    /*this.isAnswerCorrect() ? this.passed() : this.failed();*/
     if (this.isAnswerCorrect()) {
       this.passed();
     } else {
@@ -271,6 +273,7 @@ class Game extends Component {
   };
 
   gameStatusChange = () => {
+    // start и next идентичны)
     if (store.getState().gameStatus.currentStatus === 'start') {
       this.setQuestionsNextLevel();
       store.dispatch(gamePlay());
@@ -361,7 +364,7 @@ class Game extends Component {
                 }}
               />
               <div className="answer-field">
-                <div className="answer-text">Ответ: </div>
+                <div className="answer-text">Ответ:</div>
                 <div className="answer-input">{this.state.value}</div>
               </div>
             </div>

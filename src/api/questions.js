@@ -11,7 +11,7 @@ export function generateQuestionsList(complexityLevel, config) {
 
     if (remainder !== 0) {
       operator = operators[Math.floor(Math.random() * operators.length)];
-      result.asnwers = 0;
+      result.asnwers = 0; // aNSwers
       result.questionType = 'open';
       result.responseTime = config.questionType['open'].responseTime;
 
@@ -45,6 +45,13 @@ export function generateQuestionsList(complexityLevel, config) {
       if (operator === '-') {
         firstNumber = Math.floor(Math.random() * maxNumber);
         secondNumber = Math.floor(Math.random() * maxNumber);
+
+        // можно переписать короче
+        //
+        /*result.correctAnswer = Math.max(firstNumber, secondNumber) - Math.min(firstNumber, secondNumber);
+        result.question =
+          `Cколько будет ${Math.max(firstNumber, secondNumber)} ${operator} ${Math.min(firstNumber, secondNumber)} ?`;*/
+
         if (secondNumber >= firstNumber) {
           result.correctAnswer = secondNumber - firstNumber;
           result.question =
