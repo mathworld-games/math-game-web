@@ -7,7 +7,7 @@ class Home extends Component {
   sortArray = array => {
     if (array.length === 0) return 0;
     let scoresArray = array.map(elem => {
-      return elem[1].split('%').shift();
+      return elem[1].split('%').shift(); // parseInt(elem[1]) ?
     });
 
     let sortedArray = scoresArray.sort(function(a, b) {
@@ -140,6 +140,7 @@ class Home extends Component {
                   }}
                   className="menu-link">
                   <div className="player-best-score">
+                    {/*зачем передается index в sortArray?*/}
                     <div>{this.sortArray(item.score, index)}</div>
                     <div className="best-score-figure-container">
                       <svg
